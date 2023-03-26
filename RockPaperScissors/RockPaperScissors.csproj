@@ -48,4 +48,10 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\paper.png" />
+	  <None Remove="Resources\Images\rock.png" />
+	  <None Remove="Resources\Images\scissors.png" />
+	</ItemGroup>
+
 </Project>

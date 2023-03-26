@@ -1,41 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RockPaperScissors"
+             xmlns:vm="clr-namespace:RockPaperScissors.ViewModels"
+             xmlns:conv="clr-namespace:RockPaperScissors.Converters"
              x:Class="RockPaperScissors.MainPage">
 
-    <ScrollView>
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <x:String x:Key="Paper">paper.png</x:String>
+        <x:String x:Key="Rock">rock.png</x:String>
+        <x:String x:Key="Scissors">scissors.png</x:String>
+
+        <conv:IntToStringConverter x:Key="int2string"/>
+    </ContentPage.Resources>
+
+    <ScrollView
+        HorizontalOptions="Center"
+        >
         <VerticalStackLayout
             Spacing="25"
-            Padding="30,0"
             VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
+                Text="Rock paper scissors"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="30" >
+                <Border
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 2,2,2,2"
+                    BackgroundColor="{StaticResource Secondary}"
+                    WidthRequest="250"
+                    HeightRequest="250" >
+                    <ImageButton 
+                        HeightRequest="225"
+                        WidthRequest="225"
+                        Source="{StaticResource Rock}"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Command="{Binding RockCommand}" />
+                </Border>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                <Border
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 2,2,2,2"
+                    BackgroundColor="{StaticResource Secondary}"
+                    WidthRequest="250"
+                    HeightRequest="250" >
+                    <ImageButton 
+                        HeightRequest="225"
+                        WidthRequest="225"
+                        Source="{StaticResource Paper}"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Command="{Binding PaperCommand}" />
+                </Border>
+
+                <Border
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 2,2,2,2"
+                    BackgroundColor="{StaticResource Secondary}"
+                    WidthRequest="250"
+                    HeightRequest="250" >
+                    <ImageButton 
+                        HeightRequest="225"
+                        WidthRequest="225"
+                        Source="{StaticResource Scissors}"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Command="{Binding ScissorsCommand}" />
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="10" >
+                <Label
+                    Text="You picked: "
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="18" />
+
+                <Label
+                    Text="{Binding ChosenValue, Converter={StaticResource int2string}}"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="18"
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="10">
+                <Label
+                    Text="Computer picked: " 
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="18" />
+                <Label
+                    Text="{Binding Pick, Converter={StaticResource int2string}}"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="18"
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label
+                Text="{Binding TextResult}"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="26"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
